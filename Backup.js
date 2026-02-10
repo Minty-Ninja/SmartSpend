@@ -1,6 +1,9 @@
   
   // ---------- FIREBASE (imports must run in module context) ----------
-  import { signupUser, loginUser, logoutUser, listenSession } from "./auth";
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword }
+    from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
   import { getFirestore, doc, setDoc, addDoc, collection, getDocs, deleteDoc, updateDoc, query, orderBy }
     from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
@@ -27,7 +30,7 @@ const dashboardSection = document.getElementById('dashboard-section');
 const homePopup = document.getElementById('home-popup');
 const popupBtn = document.getElementById('popup-btn');
 
-toggleForms = function (e) {
+window.toggleForms = function (e) {
   if (e && e.preventDefault) e.preventDefault();
   const signupForm = document.getElementById("signup-form");
   const loginForm = document.getElementById("login-form");
@@ -62,7 +65,6 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     currentUserId = userCredential.user.uid;
     await setDoc(doc(db, "users", currentUserId), { name, email });
-    console.log("hi")
 
     // Show dashboard first, then load user data (so chart renders on visible canvas)
     showDashboard(true);
@@ -138,7 +140,7 @@ function showDashboard(withSlide = false) {
       authSection.style.display = 'none';
       authSection.classList.remove('slide-out-up');
       dashboardSection.classList.remove('slide-in-up');
-    }, 10);
+    }, 650);
   } else {
     authSection.style.display = 'none';
   }
