@@ -5,7 +5,7 @@
     from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
   // const firebaseConfig = {
-  //   apiKey: "AIzaSyDlqTN_qGHoR_pATZ1esqxnrCrx83WyJ3E",
+
   //   authDomain: "smartspend-48e3b.firebaseapp.com",
   //   projectId: "smartspend-48e3b",
   //   storageBucket: "smartspend-48e3b.firebasestorage.app",
