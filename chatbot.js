@@ -1,5 +1,4 @@
 const model = "gemini-2.5-flash"
-// const key = "AIzaSyAXTu-0tJxSAc52qzl5TBUFnqY5NPO2JSU" 
 import {GAK} from '.env'
 
 console.log("hi")
