@@ -1,11 +1,12 @@
   
   // ---------- FIREBASE (imports must run in module context) ----------
-  import { signupUser, loginUser, logoutUser, listenSession } from "./auth";
+  import { auth, db } from "./config";
   import { getFirestore, doc, setDoc, addDoc, collection, getDocs, deleteDoc, updateDoc, query, orderBy }
     from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
+  import {onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js"  
   // const firebaseConfig = {
-
+  //   apiKey: "AIzaSyDlqTN_qGHoR_pATZ1esqxnrCrx83WyJ3E",
   //   authDomain: "smartspend-48e3b.firebaseapp.com",
   //   projectId: "smartspend-48e3b",
   //   storageBucket: "smartspend-48e3b.firebasestorage.app",
@@ -27,7 +28,7 @@ const dashboardSection = document.getElementById('dashboard-section');
 const homePopup = document.getElementById('home-popup');
 const popupBtn = document.getElementById('popup-btn');
 
-toggleForms = function (e) {
+window.toggleForms = function (e) {
   if (e && e.preventDefault) e.preventDefault();
   const signupForm = document.getElementById("signup-form");
   const loginForm = document.getElementById("login-form");
@@ -57,6 +58,13 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
+  user = signupUser(name, email, password)
+  if (user){
+    console.log("Sign up Here")
+    showDashboard()
+
+  }
+
 
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
